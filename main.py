@@ -15,12 +15,11 @@ input_ids, token_type_ids, attention_masks, categories = dataset_builder.create_
 def train_dataset_generator():
     for input_id, token_type_id, attention_mask, category in zip(input_ids[:5000], token_type_ids[:5000], attention_masks[:5000],
                                                                  categories[:5000]):
-
+         # have tried here both [0,1] (with categorical_crossentropy) and 0,1 (SparseCategoricalCrossentropy)
         yield ({'input_ids': input_id,
                 'attention_mask': attention_mask,
                 'token_type_ids': token_type_id},
                np.argmax(category))
-
 
 train_dataset = tf.data.Dataset.from_generator(train_dataset_generator,
                                                ({'input_ids': tf.int32,
