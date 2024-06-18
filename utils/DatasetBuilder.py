@@ -33,7 +33,7 @@ class DatasetBuilder:
             raise Exception('Please create headlines and sarcastic list by running parse_json')
 
         x_inputs_ids, x_token_type_ids, x_attention_mask, y_train = [], [], [], []
-        tokenizer = self.__get_tokenizer()
+        tokenizer = DatasetBuilder.__get_tokenizer()
 
         for index, (headline, is_sarcastic) in enumerate(zip(self.__headlines, self.__sarcastic)):
             categorical = to_categorical(is_sarcastic, 2)
